@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mark Picasso — Writer. Builder. Humanitarian.</title>
+<meta name="description" content="Mark Picasso, MPA — author, humanitarian app builder, musician, and filmmaker based in Eugene, Oregon." />
+<style>
+  :root {
+    --ink: #1a1a18;
+    --ink-soft: #5a5a56;
+    --ink-faint: #9a9a94;
+    --page: #faf9f6;
+    --surface: #f2f0eb;
+    --border: rgba(26,26,24,0.12);
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --teal-mid: #1d9e75;
+    --serif: 'Georgia', 'Times New Roman', serif;
+    --sans: system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--page);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 32px 64px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: normal;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.8;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #0d5e49; }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--border);
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 32px;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    margin-bottom: 28px;
+  }
+
+  /* ABOUT */
+  .about-text {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 620px;
+  }
+  .about-text em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  /* BOOKS */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .book-card {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .book-card h3 {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: normal;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .book-tag {
+    font-size: 11px;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .book-card.wip {
+    border-style: dashed;
+    opacity: 0.7;
+  }
+
+  /* APPS */
+  .apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .app-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--page);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+  .app-row:hover { background: var(--surface); }
+  .app-row + .app-row { border-top: 1px solid var(--border); }
+  .app-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teal-mid);
+    flex-shrink: 0;
+  }
+  .app-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    flex: 1;
+  }
+  .app-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* MUSIC & FILM */
+  .media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .media-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .media-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .media-card p {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .badge-live { background: var(--teal-light); color: var(--teal); }
+  .badge-making { background: #EEEDFE; color: #534AB7; }
+
+  /* SUPPORT */
+  .support-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .support-block h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: normal;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .support-block p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 420px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer span {
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    nav { padding: 12px 20px; }
+    .nav-links { gap: 14px; }
+    .hero { padding: 56px 20px 48px; }
+    section { padding: 40px 20px; }
+    .media-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Mark Picasso</a>
+  <ul class="nav-links">
+    <li><a href="#books">Books</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#music">Music & Film</a></li>
+    <li><a href="#support">Support</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Mark Picasso, MPA &nbsp;·&nbsp; Eugene, Oregon</p>
+  <h1>Writer. Builder.<br>Humanitarian.</h1>
+  <p class="hero-sub">I write books about healing, build free apps for displaced people, make music, and create films. Everything here is made independently — for the people who need it most.</p>
+  <div class="hero-btns">
+    <a href="#books" class="btn-primary">Read my books</a>
+    <a href="#support" class="btn-outline">Support my work</a>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<section id="about">
+  <p class="section-label">About</p>
+  <p class="about-text">
+    I have a Master's in Public Administration and have worked directly with displaced populations — building wells, developing food sources, and sitting with people who have lost everything. That experience shapes everything I write and build. My work lives at the intersection of <em>technology, healing, and a better world</em>.
+  </p>
+</section>
+
+<hr class="divider" />
+
+<section id="books">
+  <p class="section-label">Books</p>
+  <div class="books-grid">
+    <div class="book-card">
+      <h3>Healing Unwanted Thoughts</h3>
+      <span class="book-tag">Mental health</span>
+    </div>
+    <div class="book-card">
+      <h3>Healing Anxiety</h3>
+      <span class="book-tag">Mental health</span>
+    </div>
+    <div class="book-card">
+      <h3>Healing The Globe Through Virtual Reality</h3>
+      <span class="book-tag">Humanitarian tech</span>
+    </div>
+    <div class="book-card">
+      <h3>The Healing Church of Virtual Reality</h3>
+      <span class="book-tag">Technology & faith</span>
+    </div>
+    <div class="book-card">
+      <h3>War and Peace AI: The Future of Peaceful Artificial Intelligence</h3>
+      <span class="book-tag">AI & peace</span>
+    </div>
+    <div class="book-card">
+      <h3>The Sex Your Marriage Wants (VR edition)</h3>
+      <span class="book-tag">Relationships</span>
+    </div>
+    <div class="book-card">
+      <h3>Peer Specialists Are Vitally Important</h3>
+      <span class="book-tag">Mental health</span>
+    </div>
+    <div class="book-card wip">
+      <h3>Insignia</h3>
+      <span class="book-tag">In progress</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="apps">
+  <p class="section-label">Humanitarian apps</p>
+  <div class="apps-list">
+    <a class="app-row" href="https://markmontgomerysbooks-stack.github.io/Club_0-9-5/" target="_blank" rel="noopener">
+      <div class="app-dot"></div>
+      <span class="app-name">Sadiq Snack$</span>
+      <span class="app-desc">Connecting donors to refugees via cryptocurrency</span>
+    </a>
+    <a class="app-row" href="#" target="_blank" rel="noopener">
+      <div class="app-dot"></div>
+      <span class="app-name">Saha Studio</span>
+      <span class="app-desc">Free AI design tool for displaced people — 7 languages</span>
+    </a>
+    <a class="app-row" href="https://markmontgomerysbooks-stack.github.io/kiva-arabic-guide/" target="_blank" rel="noopener">
+      <div class="app-dot"></div>
+      <span class="app-name">Kiva Arabic Guide</span>
+      <span class="app-desc">Bilingual borrower guide for Arabic speakers</span>
+    </a>
+    <a class="app-row" href="#" target="_blank" rel="noopener">
+      <div class="app-dot"></div>
+      <span class="app-name">Can Connect</span>
+      <span class="app-desc">Recycling proceeds sent to people in need</span>
+    </a>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="music">
+  <p class="section-label">Music & film</p>
+  <div class="media-grid">
+    <div class="media-card">
+      <span class="badge badge-live">Available</span>
+      <h3>Original music</h3>
+      <p>Produced independently. Also creating AI-assisted music via Suno. Available for listening and licensing.</p>
+    </div>
+    <div class="media-card">
+      <span class="badge badge-making">In production</span>
+      <h3>AI-generated feature film</h3>
+      <p>A 90-minute film being built over one year using AI tools — one of the first of its kind made by a single independent creator.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="support">
+  <div class="support-block">
+    <h2>Support this work</h2>
+    <p>Everything here is free and made independently — no company, no team, just one person trying to make things that matter. If it's meant something to you, consider supporting it.</p>
+    <a href="https://ko-fi.com" target="_blank" rel="noopener" class="btn-primary">Support on Ko-fi</a>
+  </div>
+</section>
+
+<footer>
+  <span>© Mark Picasso, MPA &nbsp;·&nbsp; Eugene, Oregon</span>
+  <ul class="footer-links">
+    <li><a href="https://pinterest.com/Chronalis" target="_blank" rel="noopener">Pinterest</a></li>
+    <li><a href="https://substack.com" target="_blank" rel="noopener">Substack</a></li>
+    <li><a href="https://github.com/markmontgomerysbooks-stack" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://club-0-9-5-25t8.vercel.app" target="_blank" rel="noopener">Club 0-9-5</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
