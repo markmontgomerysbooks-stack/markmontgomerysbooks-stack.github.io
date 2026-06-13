@@ -1,1 +1,318 @@
-file:///C:/Users/markp/Downloads/index%20(21).html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mark Picasso — Writer. Builder. Humanitarian.</title>
+<meta name="description" content="Mark Picasso, MPA — author, humanitarian app builder, musician, and filmmaker based in Eugene, Oregon." />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #0d0d0b;
+    --ink-soft: #444440;
+    --ink-faint: #888884;
+    --page: #f7f5f0;
+    --surface: #eeebe4;
+    --white: #ffffff;
+    --teal: #0a5c47;
+    --teal-mid: #1a8a68;
+    --teal-light: #d4efe5;
+    --gold: #c8922a;
+    --border: rgba(13,13,11,0.1);
+    --display: 'Playfair Display', Georgia, serif;
+    --body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--body);
+    background: var(--page);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-tagline {
+    font-size: 11px;
+    color: var(--teal-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+  .hero-text {
+    background: var(--ink);
+    color: var(--white);
+    padding: 72px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    font-weight: 600;
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 380px;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .btn-primary {
+    background: var(--teal-mid);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal); }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.75);
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: white; color: white; }
+
+  /* ── HERO ART PANEL ── */
+  .hero-art {
+    position: relative;
+    background: var(--surface);
+    overflow: hidden;
+    min-height: 420px;
+  }
+  .hero-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .art-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--ink-faint);
+    border: 2px dashed var(--border);
+    min-height: 420px;
+    padding: 32px;
+    text-align: center;
+  }
+  .art-placeholder svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.35;
+  }
+  .art-placeholder p { font-size: 13px; line-height: 1.5; }
+  .art-placeholder label {
+    background: var(--ink);
+    color: white;
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .art-placeholder label:hover { background: var(--teal); }
+  #hero-upload { display: none; }
+  .art-swap-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+  }
+  .hero-art:hover .art-swap-btn { display: block; }
+
+  /* ── DELIVERABLES ── */
+  .deliverables {
+    background: var(--white);
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .deliverables-label {
+    padding: 20px 40px 0;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-faint);
+  }
+  .deliverables-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16px 32px 20px;
+    gap: 10px;
+  }
+  .del-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--page);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .del-btn:hover {
+    border-color: var(--teal-mid);
+    background: var(--teal-light);
+    color: var(--teal);
+  }
+  .del-btn .icon { font-size: 16px; }
+
+  /* ── SECTION SHELL ── */
+  .section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 72px 40px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+  .section-count {
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── BOOKS GRID ── */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .book-cover {
+    aspect-ratio: 2/3;
+    background: var(--surface);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+  .book-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    line-height: 1.3;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--teal-light) 100%);
+  }
+  .book-title { font-size: 13px; font-weight: 600; line-height: 1.4; }
+  .book-meta { font-size: 12px; color: var(--ink-faint); }
+  .book-link {
+    font-size: 12px;
+    color: var(--teal-mid);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .book-link:hover { text-decoration: underline; }
+
+  /* ── APPS GRID ── */
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .app-card {
