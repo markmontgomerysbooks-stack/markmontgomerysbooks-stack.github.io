@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mark Picasso — Writer. Builder. Humanitarian.</title>
+<meta name="description" content="Mark Picasso, MPA — author, humanitarian app builder, musician, and filmmaker based in Eugene, Oregon." />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #0d0d0b;
+    --ink-soft: #444440;
+    --ink-faint: #888884;
+    --page: #f7f5f0;
+    --surface: #eeebe4;
+    --white: #ffffff;
+    --teal: #0a5c47;
+    --teal-mid: #1a8a68;
+    --teal-light: #d4efe5;
+    --gold: #c8922a;
+    --border: rgba(13,13,11,0.1);
+    --display: 'Playfair Display', Georgia, serif;
+    --body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--body);
+    background: var(--page);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-tagline {
+    font-size: 11px;
+    color: var(--teal-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+  .hero-text {
+    background: var(--ink);
+    color: var(--white);
+    padding: 72px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    font-weight: 600;
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 380px;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .btn-primary {
+    background: var(--teal-mid);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal); }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.75);
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: white; color: white; }
+
+  /* ── HERO ART PANEL ── */
+  .hero-art {
+    position: relative;
+    background: var(--surface);
+    overflow: hidden;
+    min-height: 420px;
+  }
+  .hero-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .art-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--ink-faint);
+    border: 2px dashed var(--border);
+    min-height: 420px;
+    padding: 32px;
+    text-align: center;
+  }
+  .art-placeholder svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.35;
+  }
+  .art-placeholder p { font-size: 13px; line-height: 1.5; }
+  .art-placeholder label {
+    background: var(--ink);
+    color: white;
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .art-placeholder label:hover { background: var(--teal); }
+  #hero-upload { display: none; }
+  .art-swap-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+  }
+  .hero-art:hover .art-swap-btn { display: block; }
+
+  /* ── DELIVERABLES ── */
+  .deliverables {
+    background: var(--white);
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .deliverables-label {
+    padding: 20px 40px 0;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-faint);
+  }
+  .deliverables-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16px 32px 20px;
+    gap: 10px;
+  }
+  .del-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--page);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .del-btn:hover {
+    border-color: var(--teal-mid);
+    background: var(--teal-light);
+    color: var(--teal);
+  }
+  .del-btn .icon { font-size: 16px; }
+
+  /* ── SECTION SHELL ── */
+  .section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 72px 40px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+  .section-count {
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── BOOKS GRID ── */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 28px;
+  }
+
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .book-card:hover {
+    border-color: var(--teal-mid);
+    box-shadow: 0 4px 20px rgba(10,92,71,0.09);
+  }
+
+  /* Cover */
+  .book-cover {
+    aspect-ratio: 2/3;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .book-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    line-height: 1.3;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--teal-light) 100%);
+    gap: 10px;
+  }
+  .cover-upload-hint {
+    font-family: var(--body);
+    font-size: 10px;
+    color: var(--ink-faint);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .book-cover:hover .cover-upload-hint { opacity: 1; }
+  .cover-swap-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,92,71,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .book-cover:hover .cover-swap-overlay { opacity: 1; }
+  .cover-swap-overlay span {
+    background: white;
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Body */
+  .book-body {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .book-title { font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+  .book-meta { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.07em; }
+
+  /* Price row */
+  .book-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .price-badge {
+    background: var(--teal-light);
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .price-badge.paid { background: #fef3dc; color: var(--gold); }
+  .edit-price-btn {
+    font-size: 11px;
+    color: var(--ink-faint);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .edit-price-btn:hover { color: var(--ink); background: var(--surface); }
+
+  /* Price editor */
+  .price-editor {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+  }
+  .price-editor.open { display: flex; }
+  .price-editor input {
+    width: 80px;
+    padding: 5px 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: var(--body);
+    color: var(--ink);
+    background: var(--page);
+  }
+  .price-editor input:focus { outline: none; border-color: var(--teal-mid); }
+  .price-save-btn {
+    padding: 5px 10px;
+    background: var(--teal-mid);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .price-save-btn:hover { background: var(--teal); }
+
+  /* Action buttons */
+  .book-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .book-btn-free {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    background: var(--teal-light);
+    color: var(--teal);
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .book-btn-free:hover { background: #b8e5d6; }
+  .book-btn-free.hidden { display: none; }
+
+  .book-btn-buy {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    background: #0070ba; /* PayPal blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .book-btn-buy:hover { background: #005ea6; }
+  .book-btn-buy.hidden { display: none; }
+
+  /* PDF upload pill inside card */
+  .pdf-upload-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+  }
+  .pdf-status {
+    font-size: 11px;
+    color: var(--ink-faint);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pdf-status.uploaded { color: var(--teal); }
+  .pdf-upload-btn {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--page);
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-weight: 500;
+    transition: border-color 0.15s;
+    white-space: nowrap;
+  }
+  .pdf-upload-btn:hover { border-color: var(--teal-mid); color: var(--teal); }
+
+  /* Admin notice */
+  .books-admin-notice {
+    background: #fef9ee;
+    border: 1.5px solid #f0d89a;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #8a6800;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── APPS GRID ── */
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .app-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .app-card:hover {
+    border-color: var(--teal-mid);
+    box-shadow: 0 4px 20px rgba(10,92,71,0.08);
+  }
+  .app-icon { font-size: 28px; }
+  .app-name { font-family: var(--display); font-size: 20px; font-weight: 700; }
+  .app-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+  .app-tag {
+    display: inline-block;
+    background: var(--teal-light);
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+  .app-link {
+    font-size: 13px;
+    color: var(--teal-mid);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .app-link:hover { text-decoration: underline; }
+
+  /* ── ART GALLERY ── */
+  .alt-bg { background: var(--ink); color: var(--white); }
+  .alt-bg .section-header { border-bottom-color: rgba(255,255,255,0.15); }
+  .alt-bg .section-count { color: rgba(255,255,255,0.35); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .gallery-slot {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px dashed rgba(255,255,255,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .gallery-slot:hover { border-color: rgba(255,255,255,0.4); }
+  .gallery-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .slot-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    text-align: center;
+    padding: 16px;
+  }
+  .slot-empty svg { width: 32px; height: 32px; opacity: 0.4; }
+  .slot-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.55);
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    display: none;
+  }
+  .gallery-slot:hover .slot-label { display: block; }
+
+  /* ── MUSIC/FILM ── */
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .media-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .media-thumb {
+    aspect-ratio: 16/9;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  .media-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .media-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--surface), var(--teal-light));
+  }
+  .media-body { padding: 16px 20px 20px; }
+  .media-type {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .media-title { font-family: var(--display); font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .media-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+  .media-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--teal-mid);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ── SUPPORT ── */
+  .support-inner {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .support-text h2 {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .support-text p { color: var(--ink-soft); line-height: 1.7; font-size: 15px; }
+  .support-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .support-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+    background: var(--page);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .support-btn:hover { border-color: var(--teal-mid); background: var(--teal-light); }
+  .support-btn .sicon { font-size: 22px; }
+
+  /* ── SUBSTACK BAND ── */
+  .substack-band {
+    background: var(--gold);
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .substack-band h3 {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  .substack-band p { color: rgba(255,255,255,0.8); font-size: 15px; }
+  .substack-band a {
+    background: var(--white);
+    color: var(--gold);
+    padding: 12px 32px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-logo {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: white; }
+  .footer-copy { font-size: 12px; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 36px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--ink-faint);
+    line-height: 1;
+  }
+  .modal-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+  .modal-meta { font-size: 13px; color: var(--ink-faint); margin-bottom: 20px; }
+  .modal-price-display {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .modal-paypal-btn {
+    width: 100%;
+    background: #0070ba;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+  }
+  .modal-paypal-btn:hover { background: #005ea6; }
+  .modal-free-btn {
+    width: 100%;
+    background: var(--teal-light);
+    color: var(--teal);
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  .modal-free-btn:hover { background: #b8e5d6; }
+  .modal-note {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 48px 28px; }
+    .hero-art { min-height: 260px; }
+    .deliverables-grid { padding: 12px 20px 16px; }
+    .section { padding: 48px 24px; }
+    .support-inner { grid-template-columns: 1fr; padding: 28px; }
+    nav { padding: 0 20px; }
+    footer { padding: 24px 20px; }
+    .substack-band { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Mark Picasso</a>
+  <span class="nav-tagline">Eugene, Oregon · MPA</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <span class="hero-eyebrow">Author · Builder · Humanitarian</span>
+    <h1 class="hero-title">Writing the<br><em>world</em> into<br>healing.</h1>
+    <p class="hero-sub">400+ published works across 100 languages. Apps for refugees. Music, film, and VR experiences built to matter.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#books">Explore my work</a>
+      <a class="btn-ghost" href="https://github.com/markmontgomerysbooks-stack" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+  <div class="hero-art" id="heroArtPanel">
+    <div class="art-placeholder" id="heroPlaceholder">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="36" height="36" rx="4"/><circle cx="17" cy="17" r="4"/><path d="M6 32l10-10 8 8 6-6 12 12"/></svg>
+      <p>Drop your art here.<br/>This panel rotates with your work.</p>
+      <label for="hero-upload">Upload Art</label>
+      <input type="file" id="hero-upload" accept="image/*" onchange="loadHeroImage(event)" />
+    </div>
+    <img id="heroImg" src="" alt="Mark Picasso artwork" style="display:none;width:100%;height:100%;object-fit:cover;" />
+    <button class="art-swap-btn" onclick="document.getElementById('hero-upload').click()">Change Art ↑</button>
+  </div>
+</div>
+
+<!-- DELIVERABLES -->
+<div class="deliverables">
+  <div class="deliverables-label">Explore my work</div>
+  <div class="deliverables-grid">
+    <a class="del-btn" href="#books"><span class="icon">📚</span> Books</a>
+    <a class="del-btn" href="https://substack.com/@markpicassompa" target="_blank"><span class="icon">✉️</span> Substack</a>
+    <a class="del-btn" href="https://www.pinterest.com/Markpicassompa/" target="_blank"><span class="icon">🖼️</span> Social Media</a>
+    <a class="del-btn" href="#sketches"><span class="icon">✏️</span> Sketches</a>
+    <a class="del-btn" href="#vr"><span class="icon">🥽</span> VR Experiences</a>
+    <a class="del-btn" href="#apps"><span class="icon">⚙️</span> Apps</a>
+    <a class="del-btn" href="#music"><span class="icon">🎵</span> Music & Film</a>
+    <a class="del-btn" href="#support"><span class="icon">🤝</span> Support</a>
+  </div>
+</div>
+
+<!-- BOOKS -->
+<div id="books">
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Books</h2>
+      <span class="section-count">400+ works · 100 languages</span>
+    </div>
+
+    <div class="books-admin-notice">
+      💡 <strong>Owner tip:</strong> Click any book cover to upload a cover image. Upload a PDF so readers can download it. Set a price to enable PayPal checkout — leave at $0 to keep it free.
+    </div>
+
+    <div class="books-grid" id="booksGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- APPS -->
+<div id="apps" style="background: var(--surface);">
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Humanitarian Apps</h2>
+      <span class="section-count">Built for displaced communities</span>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card">
+        <div class="app-icon">🥙</div>
+        <span class="app-tag">Live</span>
+        <div class="app-name">Sadiq Snack$</div>
+        <div class="app-desc">Bilingual English/Arabic platform connecting refugee organizations with crypto donors via Acurast/ACU and PayPal.</div>
+        <a class="app-link" href="https://markmontgomerysbooks-stack.github.io/Club_0-9-5/" target="_blank">Open App →</a>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">♻️</div>
+        <span class="app-tag">Live</span>
+        <div class="app-name">Can Connect</div>
+        <div class="app-desc">Volunteers recycle aluminum cans and send proceeds to refugees and displaced individuals via WhatsApp.</div>
+        <a class="app-link" href="https://markmontgomerysbooks-stack.github.io" target="_blank">Open App →</a>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🎨</div>
+        <span class="app-tag">Live</span>
+        <div class="app-name">Saha Studio</div>
+        <div class="app-desc">Free print-on-demand app for displaced people to create AI-assisted designs. Seven-language interface, Redbubble tutorial.</div>
+        <a class="app-link" href="https://markmontgomerysbooks-stack.github.io" target="_blank">Open App →</a>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🌐</div>
+        <span class="app-tag">Live</span>
+        <div class="app-name">Kiva Arabic Guide</div>
+        <div class="app-desc">Bilingual guide helping Arabic speakers navigate Kiva.org for microfinance access and lending opportunities.</div>
+        <a class="app-link" href="https://markmontgomerysbooks-stack.github.io/kiva-arabic-guide/" target="_blank">Open App →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKETCHES / ART GALLERY -->
+<div id="sketches" class="alt-bg">
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title" style="color:white;">Sketches & Art</h2>
+      <span class="section-count">Upload to refresh anytime</span>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</div>
+
+<!-- VR EXPERIENCES -->
+<div id="vr">
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">VR Experiences</h2>
+      <span class="section-count">Healing through immersion</span>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card">
+        <div class="app-icon">🥽</div>
+        <span class="app-tag">Concept</span>
+        <div class="app-name">VR Healing Library</div>
+        <div class="app-desc">Immersive virtual reality environments designed for mental health healing, anxiety relief, and therapeutic exploration.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🕌</div>
+        <span class="app-tag">Concept</span>
+        <div class="app-name">Healing Church of VR</div>
+        <div class="app-desc">A virtual spiritual sanctuary blending interfaith healing practice with accessible immersive technology.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">💑</div>
+        <span class="app-tag">Book</span>
+        <div class="app-name">The Sex Your Marriage Wants (VR Edition)</div>
+        <div class="app-desc">A VR-informed companion guide for couples exploring intimacy through immersive digital experience.</div>
+        <a class="app-link" href="https://payhip.com" target="_blank">Read Book →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MUSIC & FILM -->
+<div id="music" style="background: var(--surface);">
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Music & Film</h2>
+      <span class="section-count">Original compositions & AI cinema</span>
+    </div>
+    <div class="media-grid">
+      <div class="media-card">
+        <div class="media-thumb">
+          <div class="media-thumb-placeholder">🎬</div>
+        </div>
+        <div class="media-body">
+          <div class="media-type">Film · In Production</div>
+          <div class="media-title">Sadiq and Kashfa</div>
+          <div class="media-desc">An E.T.-style animated film set in Syria about a robot named Sadiq (sincere) and an orphaned girl named Kashfa (revelation). Produced with Kling AI and InVideo.</div>
+        </div>
+      </div>
+      <div class="media-card">
+        <div class="media-thumb">
+          <div class="media-thumb-placeholder">🎵</div>
+        </div>
+        <div class="media-body">
+          <div class="media-type">Music · Original</div>
+          <div class="media-title">Original Compositions</div>
+          <div class="media-desc">A library of original recordings and Suno AI compositions exploring healing, peace, and humanitarian themes.</div>
+        </div>
+      </div>
+      <div class="media-card">
+        <div class="media-thumb" id="filmUploadThumb">
+          <div class="media-thumb-placeholder" style="cursor:pointer;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-soft);" onclick="document.getElementById('film-upload').click()">
+            <span style="font-size:28px;">＋</span>
+            Add your own
+          </div>
+          <input type="file" id="film-upload" accept="image/*" style="display:none" onchange="loadFilmThumb(event)" />
+        </div>
+        <div class="media-body">
+          <div class="media-type">Your slot</div>
+          <div class="media-title">Upload a still or artwork</div>
+          <div class="media-desc">Click the image above to add a photo, film still, or album art to this section.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBSTACK BAND -->
+<div class="substack-band">
+  <h3>Read the newsletter</h3>
+  <p>Humanitarian AI, healing tech, and dispatches from the creative frontier — in multiple languages.</p>
+  <a href="https://substack.com/@markpicassompa" target="_blank" rel="noopener">Subscribe on Substack →</a>
+</div>
+
+<!-- SUPPORT -->
+<div id="support">
+  <div class="section">
+    <div class="support-inner">
+      <div class="support-text">
+        <h2>Support the work</h2>
+        <p>Every book, app, and tool I build is aimed at people who need it most — refugees, people in crisis, communities without resources. Your support keeps it free and growing.</p>
+      </div>
+      <div class="support-buttons">
+        <a class="support-btn" href="https://www.paypal.com/paypalme/markpicassompa" target="_blank">
+          <span class="sicon">💙</span> Donate via PayPal
+        </a>
+        <a class="support-btn" href="https://payhip.com" target="_blank">
+          <span class="sicon">📚</span> Buy a Book on Payhip
+        </a>
+        <a class="support-btn" href="https://www.pinterest.com/Markpicassompa/" target="_blank">
+          <span class="sicon">📌</span> Follow on Pinterest
+        </a>
+        <a class="support-btn" href="https://github.com/markmontgomerysbooks-stack" target="_blank">
+          <span class="sicon">⭐</span> Star on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">Mark Picasso</a>
+  <ul class="footer-links">
+    <li><a href="https://www.pinterest.com/Markpicassompa/" target="_blank">Pinterest</a></li>
+    <li><a href="https://substack.com/@markpicassompa" target="_blank">Substack</a></li>
+    <li><a href="https://github.com/markmontgomerysbooks-stack" target="_blank">GitHub</a></li>
+    <li><a href="https://payhip.com" target="_blank">Payhip</a></li>
+  </ul>
+  <span class="footer-copy">© Mark Picasso, MPA · Eugene, Oregon</span>
+</footer>
+
+<!-- DOWNLOAD / BUY MODAL -->
+<div class="modal-overlay" id="bookModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-meta" id="modalMeta"></div>
+    <div class="modal-price-display" id="modalPrice"></div>
+    <div id="modalActions"></div>
+    <p class="modal-note" id="modalNote"></p>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// CLOUDINARY CONFIG
+// ─────────────────────────────────────────────
+const CLOUD_NAME = 'dkxkoe3af';
+const UPLOAD_PRESET = 'jkwhmbjg';
+
+async function uploadToCloudinary(file, resourceType = 'auto') {
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('upload_preset', UPLOAD_PRESET);
+  fd.append('resource_type', resourceType);
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`, {
+    method: 'POST',
+    body: fd
+  });
+  const data = await res.json();
+  return data.secure_url;
+}
+
+// ─────────────────────────────────────────────
+// BOOK DATA — stored in localStorage
+// ─────────────────────────────────────────────
+const DEFAULT_BOOKS = [
+  { id: 'b1', title: 'Healing Unwanted Thoughts', category: 'Mental Health', price: 0, coverUrl: '', pdfUrl: '' },
+  { id: 'b2', title: 'Healing The Globe Through Virtual Reality', category: 'Humanitarian Tech', price: 0, coverUrl: '', pdfUrl: '' },
+  { id: 'b3', title: 'Healing Anxiety', category: 'Mental Health', price: 0, coverUrl: '', pdfUrl: '' },
+  { id: 'b4', title: 'War and Peace AI: The Future of Peaceful AI', category: 'Technology & Policy', price: 0, coverUrl: '', pdfUrl: '' },
+  { id: 'b5', title: 'The Healing Church of Virtual Reality', category: 'Spirituality & Tech', price: 0, coverUrl: '', pdfUrl: '' },
+  { id: 'b6', title: 'Peer Specialists Are Vitally Important', category: 'Behavioral Health', price: 0, coverUrl: '', pdfUrl: '' },
+];
+
+// YOUR PAYPAL EMAIL — update this
+const PAYPAL_EMAIL = 'YOUR_PAYPAL_EMAIL@example.com';
+
+function loadBooks() {
+  const saved = localStorage.getItem('mp_books_v2');
+  return saved ? JSON.parse(saved) : DEFAULT_BOOKS;
+}
+function saveBooks(books) {
+  localStorage.setItem('mp_books_v2', JSON.stringify(books));
+}
+
+// ─────────────────────────────────────────────
+// RENDER BOOKS
+// ─────────────────────────────────────────────
+function renderBooks() {
+  const books = loadBooks();
+  const grid = document.getElementById('booksGrid');
+  grid.innerHTML = '';
+
+  books.forEach(book => {
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.innerHTML = buildCardHTML(book);
+    grid.appendChild(card);
+    attachCardEvents(card, book);
+  });
+}
+
+function buildCardHTML(book) {
+  const isFree = !book.price || book.price <= 0;
+  const priceBadgeClass = isFree ? 'price-badge' : 'price-badge paid';
+  const priceLabel = isFree ? 'Free' : `$${parseFloat(book.price).toFixed(2)}`;
+  const pdfLabel = book.pdfUrl ? '✓ PDF uploaded' : 'No PDF yet';
+  const pdfClass = book.pdfUrl ? 'pdf-status uploaded' : 'pdf-status';
+
+  const coverContent = book.coverUrl
+    ? `<img src="${book.coverUrl}" alt="${book.title}" /><div class="cover-swap-overlay"><span>Change Cover</span></div>`
+    : `<div class="book-cover-placeholder">${book.title}<span class="cover-upload-hint">Upload cover</span></div><div class="cover-swap-overlay"><span>Upload Cover</span></div>`;
+
+  return `
+    <div class="book-cover" data-id="${book.id}" title="Click to upload cover">
+      ${coverContent}
+      <input type="file" class="cover-file-input" accept="image/*" style="display:none" />
+    </div>
+    <div class="book-body">
+      <div class="book-title">${book.title}</div>
+      <div class="book-meta">${book.category}</div>
+
+      <div class="book-price-row">
+        <span class="${priceBadgeClass}" data-id="${book.id}">${priceLabel}</span>
+        <button class="edit-price-btn" data-id="${book.id}" title="Set price">✏️ Set price</button>
+      </div>
+      <div class="price-editor" id="pe-${book.id}">
+        <input type="number" min="0" step="0.01" placeholder="0.00" value="${book.price || ''}" class="price-input" />
+        <button class="price-save-btn" data-id="${book.id}">Save</button>
+      </div>
+
+      <div class="pdf-upload-row">
+        <span class="${pdfClass}">${pdfLabel}</span>
+        <button class="pdf-upload-btn" data-id="${book.id}">Upload PDF</button>
+        <input type="file" class="pdf-file-input" accept="application/pdf" style="display:none" />
+      </div>
+
+      <div class="book-actions">
+        <button class="book-btn-free${(!isFree || !book.pdfUrl) ? ' hidden' : ''}" data-id="${book.id}">⬇ Download Free</button>
+        <button class="book-btn-buy${(isFree || !book.pdfUrl) ? ' hidden' : ''}" data-id="${book.id}">💙 Buy — $${parseFloat(book.price||0).toFixed(2)}</button>
+        ${!book.pdfUrl ? `<span style="font-size:11px;color:var(--ink-faint);padding:4px 0;">Upload a PDF to enable downloads</span>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function attachCardEvents(card, book) {
+  const books = loadBooks();
+  const idx = books.findIndex(b => b.id === book.id);
+
+  // Cover upload
+  const coverEl = card.querySelector('.book-cover');
+  const coverInput = card.querySelector('.cover-file-input');
+  coverEl.addEventListener('click', () => coverInput.click());
+  coverInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    coverEl.innerHTML = `<div class="book-cover-placeholder" style="font-size:12px;color:var(--ink-faint);">Uploading…</div>`;
+    try {
+      const url = await uploadToCloudinary(file, 'image');
+      books[idx].coverUrl = url;
+      saveBooks(books);
+      renderBooks();
+    } catch(err) {
+      alert('Cover upload failed. Check your Cloudinary preset.');
+    }
+  });
+
+  // Price editor toggle
+  const editBtn = card.querySelector('.edit-price-btn');
+  const priceEditor = card.querySelector('.price-editor');
+  editBtn.addEventListener('click', () => priceEditor.classList.toggle('open'));
+
+  // Save price
+  const saveBtn = card.querySelector('.price-save-btn');
+  saveBtn.addEventListener('click', () => {
+    const val = parseFloat(card.querySelector('.price-input').value) || 0;
+    books[idx].price = val;
+    saveBooks(books);
+    renderBooks();
+  });
+
+  // PDF upload
+  const pdfBtn = card.querySelector('.pdf-upload-btn');
+  const pdfInput = card.querySelector('.pdf-file-input');
+  pdfBtn.addEventListener('click', () => pdfInput.click());
+  pdfInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    pdfBtn.textContent = 'Uploading…';
+    pdfBtn.disabled = true;
+    try {
+      const url = await uploadToCloudinary(file, 'raw');
+      books[idx].pdfUrl = url;
+      saveBooks(books);
+      renderBooks();
+    } catch(err) {
+      alert('PDF upload failed. Check your Cloudinary preset allows raw files.');
+      pdfBtn.textContent = 'Upload PDF';
+      pdfBtn.disabled = false;
+    }
+  });
+
+  // Free download button
+  const freeBtn = card.querySelector('.book-btn-free');
+  if (freeBtn) {
+    freeBtn.addEventListener('click', () => openModal(books[idx]));
+  }
+
+  // Buy button
+  const buyBtn = card.querySelector('.book-btn-buy');
+  if (buyBtn) {
+    buyBtn.addEventListener('click', () => openModal(books[idx]));
+  }
+}
+
+// ─────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────
+function openModal(book) {
+  const isFree = !book.price || book.price <= 0;
+  document.getElementById('modalTitle').textContent = book.title;
+  document.getElementById('modalMeta').textContent = book.category;
+  document.getElementById('modalPrice').textContent = isFree ? 'Free' : `$${parseFloat(book.price).toFixed(2)}`;
+
+  const actionsEl = document.getElementById('modalActions');
+  const noteEl = document.getElementById('modalNote');
+
+  if (isFree && book.pdfUrl) {
+    actionsEl.innerHTML = `<a class="modal-free-btn" href="${book.pdfUrl}" target="_blank" download>⬇ Download PDF — Free</a>`;
+    noteEl.textContent = 'No payment required. Opens in a new tab.';
+  } else if (!isFree && book.pdfUrl) {
+    // PayPal buy-now form
+    actionsEl.innerHTML = `
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick" />
+        <input type="hidden" name="business" value="${PAYPAL_EMAIL}" />
+        <input type="hidden" name="item_name" value="${book.title}" />
+        <input type="hidden" name="amount" value="${parseFloat(book.price).toFixed(2)}" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="return" value="${book.pdfUrl}" />
+        <input type="hidden" name="cancel_return" value="${window.location.href}" />
+        <button type="submit" class="modal-paypal-btn">💙 Pay $${parseFloat(book.price).toFixed(2)} with PayPal</button>
+      </form>
+    `;
+    noteEl.textContent = 'You will be redirected to PayPal. The PDF download link opens after payment.';
+  } else {
+    actionsEl.innerHTML = `<p style="color:var(--ink-faint);font-size:14px;text-align:center;padding:16px 0;">PDF not yet uploaded. Check back soon.</p>`;
+    noteEl.textContent = '';
+  }
+
+  document.getElementById('bookModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('bookModal').classList.remove('open');
+}
+document.getElementById('bookModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ─────────────────────────────────────────────
+// HERO IMAGE
+// ─────────────────────────────────────────────
+function loadHeroImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  document.getElementById('heroPlaceholder').style.display = 'none';
+  const img = document.getElementById('heroImg');
+  img.src = url;
+  img.style.display = 'block';
+}
+
+// ─────────────────────────────────────────────
+// FILM THUMB
+// ─────────────────────────────────────────────
+function loadFilmThumb(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const thumb = document.getElementById('filmUploadThumb');
+  thumb.innerHTML = `<img src="${url}" alt="uploaded" style="width:100%;height:100%;object-fit:cover;"><input type="file" id="film-upload" accept="image/*" style="display:none" onchange="loadFilmThumb(event)">`;
+}
+
+// ─────────────────────────────────────────────
+// GALLERY SLOTS
+// ─────────────────────────────────────────────
+const SLOTS = 8;
+const galleryGrid = document.getElementById('galleryGrid');
+for (let i = 0; i < SLOTS; i++) {
+  const slot = document.createElement('div');
+  slot.className = 'gallery-slot';
+  slot.innerHTML = `
+    <div class="slot-empty">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="28" height="28" rx="3"/><circle cx="11" cy="11" r="3"/><path d="M2 22l8-8 6 6 4-4 10 10"/></svg>
+      Tap to add art
+    </div>
+    <div class="slot-label">Click to upload</div>
+  `;
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  fileInput.style.display = 'none';
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    slot.innerHTML = `<img src="${url}" alt="sketch"><div class="slot-label">Click to replace</div>`;
+    slot.appendChild(fileInput);
+    slot.onclick = () => fileInput.click();
+  });
+  slot.appendChild(fileInput);
+  slot.addEventListener('click', () => fileInput.click());
+  galleryGrid.appendChild(slot);
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+renderBooks();
+</script>
+</body>
+</html>
